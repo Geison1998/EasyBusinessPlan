@@ -1,0 +1,28 @@
+<%= form_for :resource, url: @method do |form| %>
+  <%= form.hidden_field :user_id, value: current_user.id  %>
+  <% if @questions.blank? %>
+    <% @resource.each do |c| %>
+      <div class="form-group">
+        <%= form.label c.question.descripition %>
+        <%= form.text_area "answer[#{c.id}]", value: c.answer, id: :answer, class: 'form-control' %>
+      </div>
+    <% end %>
+  <% else %>
+    <% @questions.each do |q| %>
+      <div class="form-group">
+        <%= form.label q.descripition %>
+        <% @options = Option.where('question_id = ?', q.id) %>
+        <% if (@options.blank?) %>
+          <%= form.text_area "question[#{q.id}]", id: :answer, class: 'form-control' %>
+        <% else %>
+          <%= form.select "question[#{q.id}]", @options.collect { |option| [option.description, option.description] },{prompt: '(Selecione a opção)'}, class: 'form-control' %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+  <div class="form-group">
+    <%= form.label 'Principal forma de recebimento deste produto' %>
+    <%= form.select :payment_id, Payment.all.collect { |pay| [pay.descrition, pay.id] },{prompt: '(Selecione a forma de pagamento)'}, class: 'form-control' %>
+  </div>
+  <%= form.submit "Salvar questionário", class: 'btn btn-block btn-success' %>
+<% end %>

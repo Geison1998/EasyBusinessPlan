@@ -1,0 +1,29 @@
+
+
+<h1>Marketing</h1>
+
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>Questão</th>
+    <th>Resposta</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @marketings.each do |marketing| %>
+    <tr>
+      <td><%= marketing.descripition %></td>
+      <td>
+        <% @answer.each do |resposta| %>
+          <%= resposta.question_id == marketing.id ? resposta.answer : "" %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Ver\Editar respostas', answers_path %>

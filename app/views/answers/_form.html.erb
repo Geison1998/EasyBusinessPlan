@@ -1,0 +1,12 @@
+<%= form_with(model: answer, local: true) do |form| %>
+
+  <h1><%= @answer.question.descripition %></h1>
+  <hr>
+  <div class="form-group">
+    <%= form.text_area :answer, :class => 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Salvar', :class => 'btn btn-block btn-success' %>
+  </div>
+<% end %>

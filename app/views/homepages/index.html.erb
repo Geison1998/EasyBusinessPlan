@@ -1,0 +1,79 @@
+<div class="row">
+  <div class="col-sm-3">
+    <h4>Compartilhe</h4>
+    <a href="#"><%= image_tag "facebook.png" %></a>
+  </div>
+  <div class="col-sm-5">
+    <div class="row">
+      <div class="col-sm-12">
+        <%= image_tag "OGMT9J0.jpg", :class => 'img-rounded' %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <h4>Quais os benefícios do plano de negócio?</h4>
+        <ul>
+          <li>Você conseguirá direcionar os esforços dentro e fora da organização.</li>
+          <li>É uma excelente ferramenta de gestão, controle e acompanhamento.</li>
+          <li>Muito útil para desenvolver e avaliar o impacto das estratégias.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="row">
+      <div class="col-sm-12">
+        <h4>Não perca tempo!</h4>
+        <hr>
+        <% if !user_signed_in? %>
+          <div id="cad-button">
+            <%= link_to 'Novo usuário', '#', :id => 'btn-click', :class => 'btn btn-block btn-success' %>
+            <%= link_to 'Já sou cadastrado', '#', :id => 'btn-click-login', :class => 'btn btn-block btn-info' %>
+          </div>
+          <div style="display: none" id="cad-form">
+            <%= render 'form' %><p></p>
+            <%= link_to 'Cancelar', '#', :id => 'btn-click-cancel', :class => 'btn btn-block btn-warning' %>
+            <div class="col-sm-12">
+              <p>*Nos comprometemos em não divulgar os dados informados.</p>
+            </div>
+          </div>
+          <div style="display: none" id="login-form">
+            <%= render 'formlogin' %><p></p>
+            <%= link_to 'Cancelar', '#', :id => 'btn-click-cancel', :class => 'btn btn-block btn-warning' %>
+          </div>
+
+        <% else %>
+          <p>Você está logado com o perfil: <strong><%= current_user.email %></strong></p>
+          <p>O que deseja fazer?</p>
+          <%= link_to 'Editar perfil', edit_user_registration_path, class: 'btn btn-block btn-info' %>
+          <%= link_to 'Sair', destroy_user_session_path, method: :delete, class: 'btn btn-block btn-warning'%>
+          <%= link_to 'Iniciar o plano de negócio', new_contextualization_path, class: 'btn btn-block btn-success'%>
+          <div class="col-sm-12">
+            <p>*Nos comprometemos em não divulgar os dados informados.</p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+
+    </div>
+  </div>
+</div>
+<script>
+    $('#btn-click').click(function (event) {
+        $('#cad-form').css({display: "block"});
+        $('#cad-button').css({display: "none"});
+        event.preventDefault(); // Prevent link from following its href
+    });
+    $('#btn-click-login').click(function (event) {
+        $('#login-form').css({display: "block"});
+        $('#cad-button').css({display: "none"});
+        event.preventDefault(); // Prevent link from following its href
+    });
+    $('#btn-click-cancel').click(function (event) {
+        $('#cad-form').css({display: "none"});
+        $('#login-form').css({display: "none"});
+        $('#cad-button').css({display: "block"});
+        event.preventDefault(); // Prevent link from following its href
+    });
+</script>

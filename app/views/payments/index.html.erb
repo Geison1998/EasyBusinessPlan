@@ -1,0 +1,29 @@
+<h1>Formas de pagamentos</h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr class="bg-dark">
+      <th class="text-light">Descrição</th>
+      <th class="text-light">Número de parcelas</th>
+      <th class="text-light">Primeira parcela á vista?</th>
+      <th class="text-light" colspan="3" style="width: 20%">Ações</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @payments.each do |payment| %>
+      <tr>
+        <td class="text-info bold"><strong><%= payment.descrition %></strong></td>
+        <td><%= payment.installment %></td>
+        <td><%= payment.firstPayNow ? 'SIM' : 'NÃO'%></td>
+        <td><%= link_to 'Ver', payment, :class => 'btn btn-sm btn-info'%></td>
+        <td><%= link_to 'Editar', edit_payment_path(payment), :class => 'btn btn-sm btn-warning' %></td>
+        <td><%= link_to 'Excluir', payment, method: :delete, :class => 'btn btn-sm btn-danger', data: { confirm: 'Está certo disso?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nova forma de pagamento', new_payment_path, :class => 'btn btn-success' %>
